@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  web:
+    restart: always
+    ports:
+      - 5000:5000
+    environment:
+      - NAME
+
+networks:
+  default:
+    external:
+      name: my_services

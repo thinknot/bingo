@@ -1,0 +1,10 @@
+version: '3.5'
+
+# Prod config uses journald for logging, the web image corresponding to the current commit
+
+services:
+  web:
+    # Change the account name here (hardeejj9) to your Docker Hub account name
+    image: hardeejj9/name-web-app:sha-${COMMIT}
+    logging:
+      driver: journald
