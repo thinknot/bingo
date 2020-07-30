@@ -1,0 +1,38 @@
+name: Build
+on: push
+
+jobs:
+  build:
+    name: Build, test and publish app Docker images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build the docker-compose stack
+        run: docker-compose up --build -d
+
+      - name: Get init logs
+        run: docker-compose logs
+
+      # - name: Run test suite
+      #   run: docker-compose exec -T web python manage.py test
+
+      - name: Publish image(s)
+        run: |
+          docker tag ${{ secrets.DOCKER_USERNAME}}/${{ github.repository }} ${{ secrets.DOCKER_USERNAME}}/${{ github.repository }}:${{ github.sha }} && \
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
+          docker push ${{ secrets.DOCKER_USERNAME}}/${{ github.repository }}:${{ github.sha }}
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    name: Run remote deploy script
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: appleboy/ssh-action@v0.0.7
+        with:
+          host: ${{ secrets.DEV_SSH_HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.DEV_SSH_KEY }}
+          script: ./deploy-${{github.repository}}.sh
