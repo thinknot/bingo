@@ -14,8 +14,8 @@ jobs:
       - name: Get init logs
         run: docker-compose logs
 
-      # - name: Run test suite
-      #   run: docker-compose exec -T web python manage.py test
+      - name: Run test suite
+        run: docker-compose exec -T web python manage.py test
 
       - name: Publish image(s)
         run: |
