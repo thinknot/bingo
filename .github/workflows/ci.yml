@@ -31,8 +31,8 @@ jobs:
     steps:
       - uses: appleboy/ssh-action@v0.0.7
         with:
-          host: ${{ secrets.DEV_SSH_HOST }}
-          username: ${{ secrets.USERNAME }}
-          port: ${{ secrets.PORT }}
-          key: ${{ secrets.DEV_SSH_KEY }}
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
           script: ./deploy-${{github.repository}}.sh
