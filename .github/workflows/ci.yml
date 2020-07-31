@@ -19,9 +19,9 @@ jobs:
 
       - name: Publish image(s)
         run: |
-          docker tag ${{ secrets.DOCKER_USERNAME}}/${{ github.repository }} ${{ secrets.DOCKER_USERNAME}}/${{ github.repository }}:${{ github.sha }} && \
+          docker tag ${{ secrets.DOCKER_USERNAME}}/hello-web-app ${{ secrets.DOCKER_USERNAME}}/hello-web-app:${{ github.sha }} && \
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
-          docker push ${{ secrets.DOCKER_USERNAME}}/${{ github.repository }}:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME}}/hello-web-app:${{ github.sha }}
 
   deploy:
     if: github.ref == 'refs/heads/master'
@@ -35,4 +35,4 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          script: ./deploy-${{github.repository}}.sh
+          script: ./deploy-hello-web-app.sh
