@@ -5,6 +5,6 @@ version: '3.5'
 services:
   web:
     # Change the account name here (hardeejj9) to your Docker Hub account name
-    image: hardeejj9/name-web-app:${COMMIT}
+    image: hardeejj9/hello-web-app:${COMMIT}
     logging:
       driver: journald
