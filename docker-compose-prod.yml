@@ -1,6 +1,6 @@
 version: '3.5'
 
-# Prod config uses journald for logging, the web image corresponding to the current commit
+# Prod config uses journald for logging and the web image corresponding to the current commit
 
 services:
   web:
