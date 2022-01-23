@@ -15,7 +15,7 @@ jobs:
         run: docker-compose logs
 
       - name: Run test suite
-        run: docker-compose exec -T web pytest
+        run: docker-compose exec -T bingosvc pytest
 
       - name: Publish image(s)
         run: |
