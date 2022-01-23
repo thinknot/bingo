@@ -4,7 +4,7 @@ version: '3.5'
 
 services:
   web:
-    # Change the account name here (hardeejj9) to your Docker Hub account name
+    # Change the account name here to your Docker Hub account name
     image: clabeaux/bingo:${COMMIT}
     logging:
       driver: journald
