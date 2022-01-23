@@ -1,13 +1,13 @@
-version: '3.5'
+version: '3.9'
 
 services:
-  web:
+  bingosvc:
     restart: always
     ports:
       - 5000:5000
     environment:
       - NAME
-    container_name: bingo_web
+    container_name: bingo
 
 networks:
   default:

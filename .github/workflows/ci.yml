@@ -19,9 +19,9 @@ jobs:
 
       - name: Publish image(s)
         run: |
-          docker tag bingo_web ${{ secrets.DOCKER_USERNAME}}/bingo_web:${{ github.sha }} && \
+          docker tag bingo ${{ secrets.DOCKER_USERNAME}}/bingo:${{ github.sha }} && \
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
-          docker push ${{ secrets.DOCKER_USERNAME}}/bingo_web:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME}}/bingo:${{ github.sha }}
 
   deploy:
     if: github.ref == 'refs/heads/main'

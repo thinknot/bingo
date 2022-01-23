@@ -1,9 +1,9 @@
-version: '3.5'
+version: '3.9'
 
 # Prod config uses journald for logging and the web image corresponding to the current commit
 
 services:
-  web:
+  bingosvc:
     # Change the account name here to your Docker Hub account name
     image: clabeaux/bingo:${COMMIT}
     logging:
