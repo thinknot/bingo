@@ -1,2 +1,2 @@
-# flask-app
+# bingo
 the requisite flaskapp container

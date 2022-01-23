@@ -4,7 +4,7 @@ on: push
 jobs:
   build:
     name: Build, test and publish app Docker images
-    runs-on: debian-bullseye
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
@@ -26,7 +26,7 @@ jobs:
   deploy:
     if: github.ref == 'refs/heads/main'
     name: Run remote deploy script
-    runs-on: debian-bullseye
+    runs-on: ubuntu-20.04
     needs: build
     steps:
       - uses: appleboy/ssh-action@v0.0.7
