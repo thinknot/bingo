@@ -19,7 +19,7 @@ jobs:
 
       - name: Publish image(s)
         run: |
-          docker tag bingo ${{ secrets.DOCKER_USERNAME}}/bingo:${{ github.sha }} && \
+          docker tag bingo_api ${{ secrets.DOCKER_USERNAME}}/bingo:${{ github.sha }} && \
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
           docker push ${{ secrets.DOCKER_USERNAME}}/bingo:${{ github.sha }}
 
