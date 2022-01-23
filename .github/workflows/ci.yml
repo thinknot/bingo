@@ -4,12 +4,12 @@ on: push
 jobs:
   build:
     name: Build, test and publish app Docker images
-    runs-on: ubuntu-latest
+    runs-on: debian-bullseye
     steps:
       - uses: actions/checkout@v2
 
       - name: Build the docker-compose stack
-        run: docker network create my_services && docker-compose up --build -d
+        run: docker network create spine_ext && docker-compose up --build -d
 
       - name: Get init logs
         run: docker-compose logs
@@ -19,14 +19,14 @@ jobs:
 
       - name: Publish image(s)
         run: |
-          docker tag hello-web-app_web ${{ secrets.DOCKER_USERNAME}}/hello-web-app:${{ github.sha }} && \
+          docker tag bingo ${{ secrets.DOCKER_USERNAME}}/bingo:${{ github.sha }} && \
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
-          docker push ${{ secrets.DOCKER_USERNAME}}/hello-web-app:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME}}/bingo:${{ github.sha }}
 
   deploy:
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     name: Run remote deploy script
-    runs-on: ubuntu-latest
+    runs-on: debian-bullseye
     needs: build
     steps:
       - uses: appleboy/ssh-action@v0.0.7
@@ -35,4 +35,4 @@ jobs:
           username: deploy
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          script: ./deploy-hello-web-app.sh
+          script: ./deploy-bingo.sh
