@@ -6,7 +6,7 @@ jobs:
     name: Build, test and publish app Docker images
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Build the docker-compose stack
         run: docker network create spine_ext && docker-compose up --build -d
