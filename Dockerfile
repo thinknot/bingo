@@ -21,6 +21,5 @@ COPY . .
 
 ENV PYTHONFAULTHANDLER=1
 
-
-# Use tini as an init process:
-ENTRYPOINT ["tini", "--", "python", "main.py"]
+# Use tini when running as CLI app
+CMD ["tini", "--", "python", "main.py"]
