@@ -9,7 +9,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get -y clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Don't cache pip-downloaded packages
+WORKDIR /usr/src/app
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
@@ -17,11 +17,10 @@ RUN pip install -r requirements.txt
 RUN useradd --create-home runner
 USER runner
 
-WORKDIR /app
 COPY . .
 
 ENV PYTHONFAULTHANDLER=1
 
 
 # Use tini as an init process:
-ENTRYPOINT ["tini", "--", "python", "server.py"]
+ENTRYPOINT ["tini", "--", "python", "main.py"]
